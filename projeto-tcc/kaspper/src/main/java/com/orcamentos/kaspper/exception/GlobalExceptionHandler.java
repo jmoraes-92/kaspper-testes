@@ -21,13 +21,15 @@ public class GlobalExceptionHandler {
 	}
 
 	@ExceptionHandler(IllegalArgumentException.class)
-	public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+	public ResponseEntity<Map<String, String>> handleIllegalArgumentException(IllegalArgumentException ex) {
+		Map<String, String> errorResponse = new HashMap<>();
+		errorResponse.put("error", "Argumento inválido");
+		errorResponse.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	}
 
 	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ResponseEntity<Map<String, String>> handleDataIntegrityViolationException(
-			DataIntegrityViolationException ex) {
+	public ResponseEntity<Map<String, String>> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
 		Map<String, String> errorResponse = new HashMap<>();
 		errorResponse.put("error", "Violação de integridade referencial");
 		errorResponse.put("message", "Não é possível excluir a demanda porque há tarefas associadas.");

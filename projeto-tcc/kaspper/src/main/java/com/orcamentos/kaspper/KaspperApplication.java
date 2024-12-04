@@ -21,7 +21,7 @@ public class KaspperApplication {
         String jdbcUrl = "jdbc:mysql://localhost:3306/";
         String dbName = "oracamentoskaspper";
         String username = "root";
-        String password = "1234";
+        String password = "";
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
              Statement statement = connection.createStatement()) {
